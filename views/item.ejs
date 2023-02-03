@@ -49,6 +49,10 @@
                             <label for="description">Description</label>
                         </div>
                     </div>
+                    <div class="row center-align">
+                        <span style="color: gray; font-size: 0.9em">Last Modified: <%= new Date(item.lastModified).toLocaleDateString('en-US', { hour: "numeric", minute: "numeric", second: "numeric" }) %></span>
+                    </div>
+                    <br>
                     <div class="center-align row">
                         <div class="col s2"></div>
                         <button type="submit" id="save-item" class="col s3 btn-small left blue waves-effect waves-light">

@@ -18,12 +18,12 @@ const WIPE_INVENTORY_SQL = `DELETE FROM Items;`;
 const wipeInventory = (callback) => db.execute(WIPE_INVENTORY_SQL, callback);
 const INSERT_INTO_INVENTORY_SQL = `
 INSERT INTO Items
-    (name, quantity, description)
+    (name, quantity, description, lastModified)
 VALUES
-    (?, ?, ?);`
-const insertIntoInventory = (name, quantity, description, callback) => {
+    (?, ?, ?, ?);`
+const insertIntoInventory = (name, quantity, description, lastModified, callback) => {
     db.execute(INSERT_INTO_INVENTORY_SQL, [
-        name, quantity, description
+        name, quantity, description, lastModified
     ], callback);
 }
 const READ_INVENTORY_SQL = `SELECT * FROM Items`;
@@ -32,7 +32,7 @@ const readAllInventory = (callback) => {
 }
 const READ_ITEM_INVENTORY_SQL = `
 SELECT 
-    id, name, quantity, description 
+    id, name, quantity, description, lastModified
 FROM
     Items
 WHERE
@@ -53,12 +53,13 @@ const UPDATE_ITEM_INVENTORY_SQL = `
 UPDATE Items
 SET name = ?,
     quantity = ?,
-    description = ?
+    description = ?,
+    lastModified = ?
 WHERE
     id = ?
 `
-const updateItemInventory = (id, name, quantity, description, callback) => {
-    return db.execute(UPDATE_ITEM_INVENTORY_SQL, [name, quantity, description, id], callback);
+const updateItemInventory = (id, name, quantity, description, lastModified, callback) => {
+    return db.execute(UPDATE_ITEM_INVENTORY_SQL, [name, quantity, description, lastModified, id], callback);
 }
 
 module.exports = {};

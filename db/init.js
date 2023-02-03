@@ -2,9 +2,9 @@ const db = require("./connection");
 
 db.wipe();
 
-db.insert("Apple", 5, "Very red. Or green")
-db.insert("Orange", 5, "Very orange")
-db.insert("Yellow", 3, "Lemons")
+db.insert("Apple", 5, "Very red. Or green", new Date().toISOString());
+db.insert("Orange", 5, "Very orange", new Date().toISOString());
+db.insert("Yellow", 3, "Lemons", new Date().toISOString());
 
 db.readAll((error, results) => {
     if (error) throw error;

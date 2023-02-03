@@ -16,6 +16,8 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+const dateISONow = () => new Date().toISOString();
+
 app.get("/app", (req, res) => {
     db.readAll((error, results) => {
         if (error) res.status(500).send(error);
@@ -57,8 +59,8 @@ app.post("/app/item/new", (req, res) => {
     let {name, description, quantity} = req.body;
     quantity = parseInt(quantity);
     if (!isLegalItemInfo(name, description, quantity)) return res.status(400);
-
-    db.insert(name, quantity, description, (error, results) => {
+    const lastModified = dateISONow();
+    db.insert(name, quantity, description, lastModified, (error, results) => {
         if (error) res.status(500).send(error);
         else {
             res.redirect("/app/");
@@ -71,8 +73,8 @@ app.post("/app/item/:id/update", (req, res) => {
     let {name, description, quantity} = req.body;
     quantity = parseInt(quantity);
     if (!isLegalItemInfo(name, description, quantity)) return res.status(400);
-
-    db.update(id, name, quantity, description, (error, results) => {
+    const lastModified = dateISONow();
+    db.update(id, name, quantity, description, lastModified, (error, results) => {
         if (error) res.status(500).send(error);
         else {
             res.redirect("/app/item/" + id);

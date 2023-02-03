@@ -36,7 +36,8 @@
                         <th></th>
                         <th>Item Name</th>
                         <th>Description</th>
-                        <th>Amount</th>
+                        <th>Quantity</th>
+                        <th>Last Modified</th>
                     </tr>
                 </thead>
 
@@ -49,6 +50,7 @@
                             <td><%= item.name %></td>
                             <td><%= item.description %></td>
                             <td><%= item.quantity %></td>
+                            <td style="color: gray; font-size: 0.8em"><%= new Date(item.lastModified).toLocaleDateString('en-US', { hour: "numeric", minute: "numeric", second: "numeric" }) %></td>
                             <td> <a class="delete-item-btn btn-floating btn-small red waves-effect waves-light"
                                 href="/app/item/<%= item.id %>/delete">
                                 <i class="material-icons">delete</i>
